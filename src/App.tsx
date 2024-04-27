@@ -1,7 +1,11 @@
+import { Button } from "./components/ui/button"
 
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <h1>welcome to dashboard</h1>
+      <Button >Click Me</Button>
+    </>
   )
 }
 
