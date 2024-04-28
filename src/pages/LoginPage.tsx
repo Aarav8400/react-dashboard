@@ -43,7 +43,11 @@ const LoginPage = () => {
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
             Enter your email below to login to your account.
-            {mutation.isPending && <div>Loading...</div>}
+            {mutation.isError && (
+              <span className="text-red-500 text-sm">
+                {mutation.error.message}
+              </span>
+            )}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -70,9 +74,6 @@ const LoginPage = () => {
               disabled={mutation.isPending}
             >
               {mutation.isPending && <LoaderCircle className="animate-spin" />}
-              <LoaderCircle
-                className={mutation.isPending ? "animate-spin" : ""}
-              />
               <span className="ml-2">Sign in</span>
             </Button>
             <div className="mt-4 text-center text-sm">
