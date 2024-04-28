@@ -34,8 +34,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { LoaderCircle, MoreHorizontal } from "lucide-react";
+import { CirclePlus, LoaderCircle, MoreHorizontal } from "lucide-react";
 import { Book } from "@/types";
+import { Link } from "react-router-dom";
 
 const BookPage = () => {
   const { data, isLoading, isError } = useQuery({
@@ -45,17 +46,25 @@ const BookPage = () => {
   });
   return (
     <div>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/dashboard/home">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Books</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <div className="flex justify-between">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/dashboard/home">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Books</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <Link to="/dashboard/books/create">
+          <Button>
+            <CirclePlus size={20} />
+            <span className="m-2">Add Book</span>
+          </Button>
+        </Link>
+      </div>
       <Card className="mt-4">
         <CardHeader>
           <CardTitle>Books</CardTitle>
