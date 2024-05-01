@@ -99,46 +99,48 @@ const BookPage = () => {
             </TableHeader>
             <TableBody>
               {data?.data.map((book: Book) => {
-                <TableRow key={book._id}>
-                  <TableCell className="hidden sm:table-cell">
-                    <img
-                      alt={book.title}
-                      className="aspect-square rounded-md object-cover"
-                      height="64"
-                      src={book.coverImage}
-                      width="64"
-                    />
-                  </TableCell>
-                  <TableCell className="font-medium">{book.title}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{book.genre}</Badge>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {book.author.name}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {book.createdAt}
-                  </TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          aria-haspopup="true"
-                          size="icon"
-                          variant="ghost"
-                        >
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>;
+                return (
+                  <TableRow key={book._id}>
+                    <TableCell className="hidden sm:table-cell">
+                      <img
+                        alt={book.title}
+                        className="aspect-square rounded-md object-cover"
+                        height="64"
+                        src={book.coverImage}
+                        width="64"
+                      />
+                    </TableCell>
+                    <TableCell className="font-medium">{book.title}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline">{book.genre}</Badge>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {book.author.name}
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {book.createdAt}
+                    </TableCell>
+                    <TableCell>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            aria-haspopup="true"
+                            size="icon"
+                            variant="ghost"
+                          >
+                            <MoreHorizontal className="h-4 w-4" />
+                            <span className="sr-only">Toggle menu</span>
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem>Delete</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                );
               })}
             </TableBody>
           </Table>
