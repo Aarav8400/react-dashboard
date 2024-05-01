@@ -1,24 +1,11 @@
-import { Link, Navigate, Outlet } from "react-router-dom";
-import {
-  Bell,
-  CircleUser,
-  Home,
-  LineChart,
-  Menu,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
-  Users,
-} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
+  CardDescription,
+  CardContent,
 } from "@/components/ui/card";
 import {
   DropdownMenu,
@@ -31,15 +18,32 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import useTokenStore from "@/store";
+import {
+  Bell,
+  CircleUser,
+  Home,
+  LineChart,
+  Menu,
+  Package,
+  Package2,
+  Search,
+  ShoppingCart,
+  Users,
+} from "lucide-react";
+import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
 
-const DashBoardLayout = () => {
+const DashboardLayout = () => {
   const { token, setToken } = useTokenStore((state) => state);
-  if (!token) {
+
+  if (token === "") {
     return <Navigate to={"/auth/login"} replace />;
   }
-  const handleLogout = () => {
+
+  const logout = () => {
+    console.log("Logging out!");
     setToken("");
   };
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -56,20 +60,29 @@ const DashBoardLayout = () => {
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <Link
+              <NavLink
                 to="/dashboard/home"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className={({ isActive }) => {
+                  return `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                    isActive && "bg-muted"
+                  }`;
+                }}
               >
                 <Home className="h-4 w-4" />
                 Home
-              </Link>
-              <Link
+              </NavLink>
+
+              <NavLink
                 to="/dashboard/books"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+                className={({ isActive }) => {
+                  return `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                    isActive && "bg-muted"
+                  }`;
+                }}
               >
                 <Package className="h-4 w-4" />
                 Books{" "}
-              </Link>
+              </NavLink>
             </nav>
           </div>
           <div className="mt-auto p-4">
@@ -194,7 +207,11 @@ const DashBoardLayout = () => {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Button onClick={logout} variant={"link"}>
+                  Logout
+                </Button>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
@@ -206,4 +223,4 @@ const DashBoardLayout = () => {
   );
 };
 
-export default DashBoardLayout;
+export default DashboardLayout;
