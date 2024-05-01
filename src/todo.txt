@@ -1,0 +1,4 @@
+Update book functionality
+Delete a book
+Pagination
+Fetch only author's book (Backend task)
